@@ -12,7 +12,10 @@ data modify storage pdata:var join.entry set from storage pdata:out get.result
 
 execute unless score *join.exists -pdata matches 1.. run function pdata:_/register
 
-execute summon item run function pdata:_/join.1
+summon item_display ~ ~ ~ {Tags:["_pdata-head"]}
+loot replace entity @n[type=item_display,tag=_pdata-head] container.0 loot pdata:_/player_head
+execute as @n[type=item_display,tag=_pdata-head] run function pdata:_/join.1
+
 execute store result score @s pdata-index run data get storage pdata:var join.entry.index
 
 function pdata:_/join.2 with storage pdata:var join.entry

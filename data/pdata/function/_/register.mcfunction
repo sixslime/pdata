@@ -8,7 +8,7 @@ execute store result storage pdata:var join.entry.index int 1 run scoreboard pla
 data modify storage pdata:var join.entry.UUID set from storage pdata:var join.UUID
 
 data modify storage six:in guuid.UUID set from storage pdata:var join.entry.UUID
-function six:api/inline/guuid
+function six:api/meta/guuid
 
 data modify storage pdata:var join.entry.guuid set from storage six:out guuid.result
 data modify storage pdata:data players append from storage pdata:var join.entry
