@@ -8,8 +8,8 @@
 #--------------------
 #- literal shorthand for calling pdata:api/index/get with [player]'s 'pdata-index' as <index>
 #--------------------
-# ...
+# 1 - success
 #--------------------
 
 execute store result storage pdata:in get.index int 1 run scoreboard players get @s pdata-index
-function pdata:api/index/get
+return run function pdata:api/index/get

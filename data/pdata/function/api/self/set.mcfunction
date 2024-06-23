@@ -9,8 +9,9 @@
 #--------------------
 #- literal shorthand for calling pdata:api/index/set with [player]'s 'pdata-index' as <index>.
 #--------------------
-# ...
+# 1 - success
+# 0 - <storage> already matches this player's entry's storage.
 #--------------------
 
 execute store result storage pdata:in set.index int 1 run scoreboard players get @s pdata-index
-function pdata:api/index/set
+return run function pdata:api/index/set
