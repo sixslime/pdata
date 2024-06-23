@@ -1,0 +1,16 @@
+#> pdata:api > self/set
+#--------------------
+# [AS] player
+# -> storage: obj
+#--------------------
+# <- result: PlayerEntry
+#--------------------
+#> sets [player]'s player entry storage to <storage>.
+#--------------------
+#- literal shorthand for calling pdata:api/index/set with [player]'s 'pdata-index' as <index>.
+#--------------------
+# ...
+#--------------------
+
+execute store result storage pdata:in set.index int 1 run scoreboard players get @s pdata-index
+function pdata:api/index/set
