@@ -1,4 +1,6 @@
 
 # Dependencies
 * six
+
 # Supports
+* loggr

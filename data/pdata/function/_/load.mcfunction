@@ -23,8 +23,6 @@ scoreboard objectives add --pdata dummy
 scoreboard objectives add pdata-index dummy
 scoreboard objectives add _pdata-leave minecraft.custom:leave_game
 
-execute unless score *max_index --pdata matches 0.. run scoreboard players set *max_index --pdata 0
-
 # tick
 schedule clear pdata:_/tick
 function pdata:_/tick

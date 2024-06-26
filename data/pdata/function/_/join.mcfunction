@@ -8,8 +8,7 @@ data modify storage pdata:var join.UUID set from entity @s UUID
 data modify storage pdata:in get.index.UUID set from storage pdata:var join.UUID
 execute store result score *join.exists -pdata run function pdata:api/index/get
 
-data modify storage pdata:var join.entry set from storage pdata:out get.result
-
+execute if score *join.exists -pdata matches 1.. run data modify storage pdata:var join.entry set from storage pdata:out get.result
 execute unless score *join.exists -pdata matches 1.. run function pdata:_/register
 
 summon item_display ~ ~ ~ {Tags:["_pdata-head"]}
