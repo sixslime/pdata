@@ -11,9 +11,12 @@ execute store result score *join.exists -pdata run function pdata:api/index/get
 execute if score *join.exists -pdata matches 1.. run data modify storage pdata:var join.entry set from storage pdata:out get.result
 execute unless score *join.exists -pdata matches 1.. run function pdata:_/register
 
-summon item_display ~ ~ ~ {Tags:["_pdata-head"]}
-loot replace entity @n[type=item_display,tag=_pdata-head] container.0 loot pdata:_/player_head
-execute as @n[type=item_display,tag=_pdata-head] run function pdata:_/join.1
+data modify storage pdata:var join.helmet set from entity @s Inventory[{Slot:103b}]
+loot replace entity @s armor.head loot pdata:_/player_head
+execute if data storage pdata:var join.helmet unless data storage pdata:var join.helmet.components run data modify storage pdata:var join.helmet.components set value {}
+
+data modify storage pdata:var join.entry.username set from entity @s Inventory[{Slot:103b}].components."minecraft:profile".name
+execute if data storage pdata:var join.helmet run function pdata:_/join.1 with storage pdata:var join
 
 execute store result score @s pdata-index run data get storage pdata:var join.entry.index
 
