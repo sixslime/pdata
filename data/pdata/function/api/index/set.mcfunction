@@ -9,7 +9,7 @@
 #--------------------
 #- literal shorthand for: `data modify storage pdata:data players[$(<index>)].storage set from storage pdata:in set.storage`
 #- a player's 'pdata-index' score indicates their entry's index.
-#- intended to work nicely with pdata:api/index/get.
+#- intended to work nicely with `pdata:api/index/get`.
 #--------------------
 # 0..1 - result of `data modify storage pdata:data players[$(<index>)].storage set from storage pdata:in set.storage`
 #--------------------

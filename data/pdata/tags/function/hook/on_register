@@ -4,10 +4,8 @@
   @ pre-tick
 --------------------
  [AS] player
- -> entry: PlayerEntry
 --------------------
  ... 
 --------------------
- - <entry> is a cache of [player]'s entry immediately after initialization.
- - to store data in [player]'s entry, do NOT modify <entry>, use normal means.
+ - to store data in [player]'s entry, it may be convenient to use `pdata:api/self/get` with `pdata:api/self/set`.
 --------------------
