@@ -1,6 +1,7 @@
 > #pdata:hook > on_register
 --------------------
- * immediately after a player is registered (joins world for first time)
+ ! immediately after a player is registered (joins world for first time)
+  @ pre-tick
 --------------------
  [AS] player
  -> entry: PlayerEntry
@@ -9,7 +10,4 @@
 --------------------
  - <entry> is a cache of [player]'s entry immediately after initialization.
  - to store data in a [player]'s entry, do NOT modify <entry>, use normal means.
- - trigger is on pre-tick time.
---------------------
-# APPEND
 --------------------
