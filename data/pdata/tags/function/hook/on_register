@@ -9,5 +9,5 @@
  ... 
 --------------------
  - <entry> is a cache of [player]'s entry immediately after initialization.
- - to store data in a [player]'s entry, do NOT modify <entry>, use normal means.
+ - to store data in [player]'s entry, do NOT modify <entry>, use normal means.
 --------------------
