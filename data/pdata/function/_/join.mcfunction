@@ -20,7 +20,7 @@ execute if score *join.holding -pdata matches 1.. unless data storage pdata:var 
 data modify storage pdata:var join.entry.username set from entity @s SelectedItem.components."minecraft:profile".name
 
 execute if score *join.holding -pdata matches 1.. run function pdata:_/join.1 with storage pdata:var join.holding
-execute unless score *join.holding -pdata matches 1.. run item replace entity @s armor.head with air
+execute unless score *join.holding -pdata matches 1.. run item replace entity @s weapon.mainhand with air
 execute store result score @s pdata-index run data get storage pdata:var join.entry.index
 
 function pdata:_/join.2 with storage pdata:var join.entry
