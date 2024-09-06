@@ -7,7 +7,7 @@ data modify storage pdata:var join.entry set value {index:0, UUID:[], guuid:"", 
 execute store result storage pdata:var join.entry.index int 1 if data storage pdata:data players[]
 data modify storage pdata:var join.entry.UUID set from storage pdata:var join.UUID
 
-data modify storage six:in guuid.UUID set from storage pdata:var join.entry.UUID
+data modify storage six:in guuid.uuid set from storage pdata:var join.entry.UUID
 function six:api/uuid/guuid
 
 data modify storage pdata:var join.entry.guuid set from storage six:out guuid.result
