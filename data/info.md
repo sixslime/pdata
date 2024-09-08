@@ -1,6 +1,7 @@
 
 # Dependencies
 * six
+* varchunk
 
 # Supports
 * loggr
