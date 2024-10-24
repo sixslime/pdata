@@ -80,8 +80,8 @@ while setting the `index` input to a numerical index is by far the most performa
 
 You can call `pdata:api/self/get` and `pdata:api/self/set` as shorthand for calling their `pdata:api/index/...` counterparts with the executing player's `pdata-index` score as the `index` input.
 
-#### A WORD OF CAUTION:
-When using `pdata:api/index/set` or `pdata:api/self/set`, notice that they do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
+### A WORD OF CAUTION
+If using `pdata:api/index/set` or `pdata:api/self/set`, notice that they do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
 
 This is to support the following workflow:
 1) Call a `get` shorthand (retrieving a player's entire `storage`).
