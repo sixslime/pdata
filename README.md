@@ -23,13 +23,12 @@ Reading/writing custom player data is then as simple as reading/writing from the
 *PlayerData provides shorthand API functions to make this even easier.*
 
 PlayerData's integrity is unnaffected by player name changes and will automatically update the Player Array to reflect a player's new username.
-# Preface
+# Usage
+### Preface
 NBT storage locations will be referred to in this format: `foo:bar -> baz`. \
 *Such that the command to get this data would be `/data get storage foo:bar baz`.*
-# Usage
 
-#### Player Array Location:
-The Player Array is stored in `pdata:data -> players`.
+The Player Array refers to `pdata:data -> players`.
 
 ### Player Registration
 
@@ -73,22 +72,62 @@ data modify storage pdata:out get.result set from storage pdata:data players[<ge
 data modify storage pdata:data players[<get.index>].storage set from storage pdata:in set.storage
 ```
 
-*It is worth noting: \
-while setting the `index` input to a numerical index is by far the most performant, any array indexer (such as `{UUID:<a player's UUID>}`) works, as long as it yields a single result.*
+While setting the `index` input to a numerical index is by far the most performant, any array indexer (such as `{UUID:<a player's UUID>}`) works.
 
 #### By Entity Context:
 
 You can call `pdata:api/self/get` and `pdata:api/self/set` as shorthand for calling their `pdata:api/index/...` counterparts with the executing player's `pdata-index` score as the `index` input.
 
-### A WORD OF CAUTION
-If using `pdata:api/index/set` or `pdata:api/self/set`, notice that they do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
+#### A WORD OF CAUTION:
+When using `pdata:api/index/set` or `pdata:api/self/set`, notice that they do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
 
 This is to support the following workflow:
 1) Call a `get` shorthand (retrieving a player's entire `storage`).
 2) Change the result in some way.
 3) Call a `set` shorthand with the modified result as input.
 
+## Examples
 
+Standard usage with 'self' shorthands:
+```mcfunction
+# get this player's data:
+function pdata:api/self/get
+# it's best practice to move output data out of it's 'out' variable before changing it.
+data modify storage mypack:var player_entry set from storage pdata:out get.result
+
+# sets this player's 'mypack.foo' value to "bar":
+data modify storage mypack:var player_entry.storage.mypack.foo set value "bar"
+
+# write the updated 'storage' back to the Player Array:
+data modify storage pdata:in set.storage set from storage mypack:var player_entry.storage
+function pdata:api/self/set
+```
+
+The same procedure as above, but via 'index' shorthands with the player's UUID:
+```mcfunction
+# the target player's UUID is stored in 'mypack:var -> target_UUID'
+
+# get the target player's data:
+data modify storage pdata:in get.index.UUID set from storage mypack:var target_UUID
+function pdata:api/index/get
+data modify storage mypack:var player_entry set from storage pdata:out get.result
+
+# sets this player's 'mypack.foo' value to "bar":
+data modify storage mypack:var player_entry.storage.mypack.foo set value "bar"
+
+# write the updated 'storage' back to the Player Array:
+# because we have the player's entry, we can use their index instead of UUID for optimal performance.
+data modify storage pdata:in set.index set from storage mypack:var player_entry.index
+data modify storage pdata:in set.storage set from storage mypack:var player_entry.storage
+function pdata:api/index/set
+```
+
+Direct array access use case:
+```mcfunction
+# change all players' 'mypack.foo' value to "BAZ" if it is already equal to "bar":
+data get storage pdata:data players[{storage:{mypack:{foo:{"bar"}}}}].storage.mypack.foo set value "BAZ"
+# it would be cumbersome to try and use shorthands for this one-line operation.
+```
 ___
 
 <p align="center">
