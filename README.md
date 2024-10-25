@@ -17,7 +17,7 @@ Every time a new unique player joins the world:
     - The player's username.
     - The player's hex-UUID as a string.
     - A location for arbitrary data.
-- The player is 'assigned' the index of the new element.
+- The player is "assigned" the index of the new element.
 
 Reading/writing custom player data is then as simple as reading/writing from the Player Array, given a player's index/information. \
 *PlayerData provides shorthand API functions to make this even easier.*
