@@ -25,7 +25,7 @@ Reading/writing custom player data is then as simple as reading/writing from the
 PlayerData's integrity is unnaffected by player name changes and will automatically update the Player Array to reflect a player's new username.
 # Usage
 ### Preface
-NBT storage locations will be referred to in this format: `foo:bar -> baz`. \
+NBT storage paths will be referred to in this format: `foo:bar -> baz`. \
 *Such that the command to get this data would be `/data get storage foo:bar baz`.*
 
 The Player Array refers to `pdata:data -> players`.
@@ -105,11 +105,11 @@ function pdata:api/self/set
 
 The same procedure as above, but via 'index' shorthands with the player's UUID:
 ```mcfunction
-# the target player's UUID is stored in 'mypack:var -> target_UUID'
-
+# assume the target player's UUID is stored in 'mypack:var -> target_UUID'
 # get the target player's data:
 data modify storage pdata:in get.index.UUID set from storage mypack:var target_UUID
 function pdata:api/index/get
+
 data modify storage mypack:var player_entry set from storage pdata:out get.result
 
 # sets this player's 'mypack.foo' value to "bar":
@@ -125,8 +125,8 @@ function pdata:api/index/set
 Direct array access use case:
 ```mcfunction
 # change all players' 'mypack.foo' value to "BAZ" if it is already equal to "bar":
-data get storage pdata:data players[{storage:{mypack:{foo:{"bar"}}}}].storage.mypack.foo set value "BAZ"
 # it would be cumbersome to try and use shorthands for this one-line operation.
+data get storage pdata:data players[{storage:{mypack:{foo:"bar"}}}].storage.mypack.foo set value "BAZ"
 ```
 ___
 
