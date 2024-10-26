@@ -24,13 +24,12 @@ Reading/writing custom player data is then as simple as reading/writing from the
 
 PlayerData's integrity is unnaffected by player name changes and will automatically update the Player Array to reflect a player's new username.
 # Usage
-### Preface
 NBT storage paths will be referred to in this format: `foo:bar -> baz`. \
 *Such that the command to get this data would be `/data get storage foo:bar baz`.*
 
 The Player Array refers to `pdata:data -> players`.
 
-### Player Registration
+## Player Registration
 
 When a player that has never joined before joins the world, an element is added to the Player Array with the following keys:
 | NBT path | Type | Contains |
@@ -46,7 +45,7 @@ The player's `pdata-index` score is also set to their element's index in the Pla
 
 `username` keys and players' `pdata-index` score will *always* be accurate, even through name changes.
 
-### Interfacing with The Player Array
+## Interfacing with The Player Array
 
 Data that your datapack defines/attaches to a player must be stored in `pdata:data -> players[<player's index>].storage.<namespace>`, where `<namespace>` is your datapack's namespace. 
 
@@ -57,36 +56,34 @@ Other than that, there are a few simple but very important rules when interfacin
 
 Whether or not a particular value in `storage.<some namespace>` should be read/changed is to be defined by `some namespace`'s datapack.
 
-### Provided Shorthands
-PlayerData provides a few shorthand functions to make interacting with the Player Array smoother:
+## Shorthands
+PlayerData provides shorthand functions to make interactions with the Player Array more convenient. \
+*These shorthands are not essential for proper usage.*
 
-#### By Index:
-
-**Getting Data**: `pdata:api/index/get` takes a single input: `pdata:in -> get.index` and is effectively shorthand for:
+### Get/Set by Index
+**Get Data**: `pdata:api/index/get` takes a single input: `pdata:in -> get.index` and is effectively shorthand for:
 ```mcfunction
 data modify storage pdata:out get.result set from storage pdata:data players[<get.index>]
 ```
-
-**Setting Data**: `pdata:api/index/set` takes 2 inputs: `pdata:in -> set.index` and `pdata:in -> set.storage`, and is effectively shorthand for:
+**Set Data**: `pdata:api/index/set` takes 2 inputs: `pdata:in -> set.index` and `pdata:in -> set.storage`, and is effectively shorthand for:
 ```mcfunction
 data modify storage pdata:data players[<get.index>].storage set from storage pdata:in set.storage
 ```
 
 While setting the `index` input to a numerical index is by far the most performant, any array indexer (such as `{UUID:<a player's UUID>}`) works.
 
-#### By Entity Context:
+### Get/Set by @s Context
+You can call `pdata:api/self/get` and `pdata:api/self/set` as shorthand for calling the `pdata:api/index/...` counterpart with the executing player's `pdata-index` score as the `index` input.
 
-You can call `pdata:api/self/get` and `pdata:api/self/set` as shorthand for calling their `pdata:api/index/...` counterparts with the executing player's `pdata-index` score as the `index` input.
-
-#### A WORD OF CAUTION:
-When using `pdata:api/index/set` or `pdata:api/self/set`, notice that they do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
+### NOTICE:
+'Set' shorthands do not merge, they **overwrite the entirety** of `storage` with `pdata:in -> set.storage`.
 
 This is to support the following workflow:
-1) Call a `get` shorthand (retrieving a player's entire `storage`).
-2) Change the result in some way.
-3) Call a `set` shorthand with the modified result as input.
+1) Call a 'get' shorthand (retrieving a player's entire `storage`).
+2) Modify the result.
+3) Call a 'set' shorthand with the modified result as input.
 
-## Examples
+# Examples
 
 Standard usage with 'self' shorthands:
 ```mcfunction
