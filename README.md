@@ -123,7 +123,7 @@ Direct array access use case:
 ```mcfunction
 # change all players' 'mypack.foo' value to "BAZ" if it is already equal to "bar":
 # it would be cumbersome to try and use shorthands for this one-line operation.
-data get storage pdata:data players[{storage:{mypack:{foo:"bar"}}}].storage.mypack.foo set value "BAZ"
+data modify storage pdata:data players[{storage:{mypack:{foo:"bar"}}}].storage.mypack.foo set value "BAZ"
 ```
 ___
 
