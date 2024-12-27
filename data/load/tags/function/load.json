@@ -1,0 +1,8 @@
+{
+    "values": [
+        "#six:load",
+        "#varchunk:load",
+        {"id":"#loggr:load", "required":false},
+        "#pdata:load"
+    ]
+}

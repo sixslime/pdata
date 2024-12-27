@@ -6,9 +6,6 @@
 # load
 scoreboard players set *pdata load-status 1
 
-# settings
-execute unless data storage pdata:settings {PERSIST:true} run function pdata:settings
-
 #declare storage pdata:var
 #declare storage pdata:in
 #declare storage pdata:out
